@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Room Detail')}"></th:block>
+<main>
+    <div class="grid-container">
+        <table>
+            <tbody>
+            <tr>
+                <td>Room Number</td>
+                <td th:text="${grid.number}"></td>
+            </tr>
+            <tr>
+                <td>Floor</td>
+                <td th:text="${grid.floor}"></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td th:text="${grid.roomType}"></td>
+            </tr>
+            <tr>
+                <td>Guess Limit</td>
+                <td th:text="${grid.guestLimit}"></td>
+            </tr>
+            <tr>
+                <td>Cost</td>
+                <td th:text="${#numbers.formatCurrency(grid.cost)}"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td th:text="${grid.description}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="blue-button" th:href="@{/rooms/reservationRoom(number=${grid.number}, username=${#authentication.getPrincipal().getUsername()})}">Make Reservation</a>
+    <a class="blue-button" th:href="@{/rooms/booking}">Cancel</a>
+</main>
+</body>
+</html>

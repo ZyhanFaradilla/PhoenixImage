@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Failed Reservation')}"></th:block>
+<main>
+  <div class="fail-container">
+    <p>Maaf selama masih belum habis waktu check out maka Anda tidak diperbolehkan melakukan pemesanan kamar lainnya.
+    Anda hanya dapat memperpanjang tanggal check out di kamar yang Anda pesan sebelum check out,
+      Anda dapat melakukan extend stay di menu My Room. Terima kasih</p>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phoenix</title>
+    <link rel="icon" type="image/ico" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/authorization.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/responsive.css}" />
+    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/resources/js/apexcharts.js}"></script>
+    <script th:src="@{/resources/js/site.js}" defer></script>
+</head>
+<body>
+<th:block th:fragment="template (breadCrumbs)">
+    <nav>
+        <a class="menu administrators" th:href="@{/administrators/index}">
+            <i class="fas fa-chart-pie"></i>
+            <span>Account</span>
+        </a>
+        <a class="menu rooms" th:href="@{/rooms/index}">
+            <i class="fas fa-th"></i>
+            <span>Room</span>
+        </a>
+        <a class="menu inventories" th:href="@{/inventories/index}">
+            <i class="fab fa-amazon"></i>
+            <span>Inventory</span>
+        </a>
+        <a class="menu roomServices" th:href="@{/roomServices/index}">
+            <i class="fas fa-box-open"></i>
+            <span>Room Service</span>
+        </a>
+        <a class="menu reservationLog" th:href="@{/reservationLog/index}">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Reservation Log</span>
+        </a>
+        <a class="menu booking" th:href="@{/rooms/booking}">
+            <i class="fas fa-users"></i>
+            <span>Booking</span>
+        </a>
+        <a class="menu reservation" th:href="@{/reservationLog/booking(username=${#authentication.getPrincipal().getUsername()})}">
+            <i class="fas fa-truck-moving"></i>
+            <span>My Room</span>
+        </a>
+    </nav>
+    <header>
+        <div class="bread-crumbs">
+            <span th:text="${breadCrumbs}"></span>
+        </div>
+        <div class="user-wrapper">
+            <div class="user">
+                <a class="full-name" th:text="${#authentication.getPrincipal().getUsername()}">anonymous</a>
+                <span class="role" th:text="${#authentication.getAuthorities()}"></span>
+                <a class="blue-button passwordAdministrator" th:href="@{/account/changePasswordFormAdministrator(username=${#authentication.getPrincipal().getUsername()})}">Change Password</a>
+                <a class="blue-button passwordGuest" th:href="@{/account/changePasswordFormGuest(username=${#authentication.getPrincipal().getUsername()})}">Change Password</a>
+            </div>
+            <div class="sign-out">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>`
+    <footer>
+        Copyright &copy; 2023
+        <span class="author">Zyhan Faradilla</span>
+        All rights reserved
+    </footer>
+</th:block>
+<header th:fragment="account-header" class="company-logo">
+    <img th:src="@{/resources/image/logo.png}" alt="Phoenix">
+    <h1>
+        Trade of <span class="bold">Phoenix</span>
+    </h1>
+</header>
+</body>
+</html>

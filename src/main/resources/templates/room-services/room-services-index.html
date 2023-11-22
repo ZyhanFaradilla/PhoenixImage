@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Room Service')}"></th:block>
+<main>
+    <div class="grid-container">
+        <form class="filter" method="get" th:action="@{/roomServices/index}">
+            <label>Employee Number</label>
+            <input type="text" placeholder="Number..." name="employeeNumber" th:value="${employeeNumber}">
+            <label>Full Name</label>
+            <input type="text" placeholder="Full Name..." name="fullName" th:value="${fullName}">
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+        <a th:href="@{/roomServices/upsertForm}" class="blue-button create-button">Add New Room Service</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Number</th>
+                <th>Full Name</th>
+                <th>Outsourcing Company</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button update-button" href="javascript:;" th:attr="data-id=*{employeeNumber}">Edit</a>
+                    <a class="blue-button detail-button" th:href="@{/roomServices/roster(employeeNumber=*{employeeNumber})}">Roster</a>
+                </td>
+                <td th:text="*{employeeNumber}"></td>
+                <td th:text="*{fullName}"></td>
+                <td th:text="*{outsourcingCompany}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}"
+                               th:href="@{/roomServices/index(page=${number}, employeeNumber=${employeeNumber}, fullName=${fullName})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <th:block th:replace="room-services/room-service-form-insert :: formDialog"></th:block>
+    <th:block th:replace="room-services/room-service-form-update :: updateDialog"></th:block>
+</div>
+<script th:src="@{/resources/js/room-services/room-services-popup.js}"></script>
+</body>
+</html>

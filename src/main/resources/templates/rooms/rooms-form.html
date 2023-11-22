@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Rooms')}"></th:block>
+<main>
+    <form class="upsert-form alternate-action" method="post" th:object="${dto}" enctype="multipart/form-data">
+        <table th:data-action="${type}">
+            <tbody>
+            <tr>
+                <td><label>Number*</label></td>
+                <td>
+                    <input type="text" th:field="*{number}" class="readonly-id">
+                    <div class="field-validation-error" th:errors="*{number}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Floor*</label></td>
+                <td>
+                    <input type="number" th:field="*{floor}">
+                    <div class="field-validation-error" th:errors="*{floor}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Room Type*</label></td>
+                <td>
+                    <select th:field="*{roomType}">
+                        <option th:value=null>Select Room Type</option>
+                        <option th:each="option : ${typeDropdown}" th:value="${option.value}"
+                                th:text="${option.textContent}"></option>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{roomType}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Guess Limit *</label></td>
+                <td>
+                    <input type="number" th:field="*{guestLimit}">
+                    <div class="field-validation-error" th:errors="*{guestLimit}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Cost*</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{cost}" class="moneyConversion">
+                    <div th:errors="*{cost}" class="field-validation-error"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="textarea-label"><label>Description</label></td>
+                <td>
+                    <textarea th:field="*{description}"></textarea>
+                    <div class="field-validation-error" th:errors="*{description}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Photo*</label></td>
+                <td>
+                    <input type="file" th:field="*{image}" accept="image/jpg">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Submit</button>
+    </form>
+</main>
+</body>
+</html>

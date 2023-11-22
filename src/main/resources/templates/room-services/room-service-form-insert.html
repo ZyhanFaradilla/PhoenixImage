@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RoomServicesForm</title>
+</head>
+<body>
+<div th:fragment="formDialog" class="popup-dialog form-dialog">
+    <header>
+        <h1>Room Service Form</h1>
+    </header>
+    <form class="alternate-action">
+        <table>
+            <tbody>
+            <tr>
+                <td>Employee Number*</td>
+                <td>
+                    <input type="text" class="employeeNumber">
+                    <div class="validation-message" data-for="employeeNumber"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>First Name*</td>
+                <td>
+                    <input type="text" class="firstName">
+                    <div class="validation-message" data-for="firstName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Middle Name</td>
+                <td>
+                    <input type="text" class="middleName">
+                    <div class="validation-message" data-for="middleName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>
+                    <input type="text" class="lastName">
+                    <div class="validation-message" data-for="lastName"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Outsourcing Company*</td>
+                <td>
+                    <input type="text" class="outsourcingCompany">
+                    <div class="validation-message" data-for="outsourcingCompany"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="blue-button" type="submit">Submit</button>
+        <a href="javascript:;" class="blue-button close-button">Close</a>
+    </form>
+</div>
+</body>
+</html>

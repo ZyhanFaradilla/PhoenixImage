@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Administrators')}"></th:block>
+<main>
+    <div class="grid-container administrators-index">
+        <a th:href="@{/administrators/upsertForm}" class="blue-button create-button">Insert New Admin</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Username</th>
+                <th>Job Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button update-button" th:href="@{/administrators/upsertForm(username=*{username})}" th:attr="data-id=*{username}">Edit</a>
+                </td>
+                <td th:text="*{username}"></td>
+                <td th:text="*{jobTitle}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}"
+                               th:href="@{/administrators/index(page=${number})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <th:block th:replace="administrators/admin-form-insert :: formDialog"></th:block>
+    <th:block th:replace="administrators/admin-form-update :: updateDialog"></th:block>
+</div>
+<script th:src="@{/resources/js/administrators/administrators-popup.js}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Roster')}"></th:block>
+<main>
+    <form class="filter" method="post" th:object="${dto}" th:action="@{/roomServices/rosterInsert}">
+        <table>
+            <input type="hidden" th:field="*{employeeNumber}">
+            <tbody>
+            <tr>
+                <td><label>Monday</label></td>
+                <td>
+                    <input type="time" th:field="*{mondayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{mondayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Tuesday</label></td>
+                <td>
+                    <input type="time" th:field="*{tuesdayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{tuesdayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Wednesday</label></td>
+                <td>
+                    <input type="time" th:field="*{wednesdayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{wednesdayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Thursday</label></td>
+                <td>
+                    <input type="time" th:field="*{thursdayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{thursdayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Friday</label></td>
+                <td>
+                    <input type="time" th:field="*{fridayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{fridayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Saturday</label></td>
+                <td>
+                    <input type="time" th:field="*{saturdayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{saturdayRosterFinish}">
+                </td>
+            </tr>
+            <tr>
+                <td><label>Sunday</label></td>
+                <td>
+                    <input type="time" th:field="*{sundayRosterStart}">
+                    <label>-</label>
+                    <input type="time" th:field="*{sundayRosterFinish}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Submit</button>
+    </form>
+</main>
+</body>
+</html>

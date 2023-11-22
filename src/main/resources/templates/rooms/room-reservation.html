@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Reservation')}"></th:block>
+<main>
+    <form class="upsert-form" method="post" th:action="@{/rooms/reservation}" th:object="${dto}">
+        <table>
+            <input type="hidden" th:field="*{number}">
+            <input type="hidden" th:field="*{username}">
+            <tbody>
+            <tr>
+                <td>Room Number</td>
+                <td th:text="${header.number}"></td>
+            </tr>
+            <tr>
+                <td>Floor</td>
+                <td th:text="${header.floor}"></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td th:text="${header.roomType}"></td>
+            </tr>
+            <tr>
+                <td>Guess Limit</td>
+                <td th:text="${header.guestLimit}"></td>
+            </tr>
+            <tr>
+                <td>Cost Per Night</td>
+                <td class="cost-hidden" th:text="${header.costPerDay}"></td>
+                <td th:text="${#numbers.formatCurrency(header.costPerDay)}"></td>
+            </tr>
+            <tr>
+                <td><label>Check In</label></td>
+                <td>
+                    <input class="checkIn" type="datetime-local" th:field="*{checkIn}">
+                    <div class="field-validation-error" th:errors="*{checkIn}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Check Out</label></td>
+                <td>
+                    <input class="checkOut" type="datetime-local" th:field="*{checkOut}">
+                    <div class="field-validation-error" th:errors="*{checkOut}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Total Cost</label></td>
+                <td class="totalCost">
+                    <input type="text" th:field="*{costTotal}">
+                </td>
+                <div class="field-validation-error">Catatan: Jika melakukan perubahan tanggal <b>Check In</b> dan <b>Check Out</b> maka harus mengklik kembali pada <b>Total Cost</b> agar dapat menyesuaikan harga dan melihat total terupdate</div>
+            </tr>
+            <tr>
+                <td><label>Reservation Method</label></td>
+                <td>
+                    <select th:field="*{reservationMethod}">
+                        <option th:value=null>Select Reservation Method</option>
+                        <option th:each="option : ${reservationMethodDropdown}" th:value="${option.value}"
+                                th:text="${option.textContent}"></option>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{reservationMethod}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Payment Method*</label></td>
+                <td>
+                    <select th:field="*{paymentMethod}">
+                        <option th:value=null>Select Payment Method</option>
+                        <option th:each="option : ${paymentMethodDropdown}" th:value="${option.value}"
+                                th:text="${option.textContent}"></option>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{paymentMethod}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="textarea-label"><label>Remark</label></td>
+                <td>
+                    <textarea th:field="*{remark}"></textarea>
+                    <div class="field-validation-error" th:errors="*{remark}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Submit</button>
+    </form>
+</main>
+<script th:src="@{/resources/js/reservation/reservation.js}"></script>
+</body>
+</html>

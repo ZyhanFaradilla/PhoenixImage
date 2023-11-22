@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="authentication-body">
+<div class="authentication-wrapper">
+    <main>
+        <h1>Sign Up</h1>
+        <form method="post" th:action="@{/account/register}" th:object="${dto}">
+            <table>
+                <div class="field-validation-error" th:errors="${dto}"></div>
+                <tbody>
+                <tr>
+                    <td><label>Username*</label></td>
+                    <td>
+                        <input type="text" th:field="*{username}" placeholder="Username">
+                        <div class="field-validation-error" th:errors="*{username}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Password*</label></td>
+                    <td>
+                        <input type="password" th:field="*{password}" placeholder="Password">
+                        <div class="field-validation-error" th:errors="*{password}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Confirm Password*</label></td>
+                    <td>
+                        <input type="password" th:field="*{confirmPassword}" placeholder="Konfirmasi Password">
+                        <div class="field-validation-error" th:errors="*{confirmPassword}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>First Name</label></td>
+                    <td>
+                        <input type="text" th:field="*{firstName}" placeholder="First Name">
+                        <div class="field-validation-error" th:errors="*{firstName}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Middle Name</label></td>
+                    <td>
+                        <input type="text" th:field="*{middleName}" placeholder="Middle Name">
+                        <div class="field-validation-error" th:errors="*{middleName}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Last Name</label></td>
+                    <td>
+                        <input type="text" th:field="*{lastName}" placeholder="Last Name">
+                        <div class="field-validation-error" th:errors="*{lastName}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Birth Date</label></td>
+                    <td>
+                        <input type="date" th:field="*{birthDate}">
+                        <div class="field-validation-error" th:errors="*{birthDate}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Gender*</label></td>
+                    <td>
+                        <input type="checkbox" id="male" name="male" value="M" th:field="*{gender}">
+                        <label for="female">Male</label>
+                        <div class="field-validation-error" th:errors="*{gender}"></div>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="female" name="female" value="F" th:field="*{gender}">
+                        <label for="female">Female</label>
+                        <div class="field-validation-error" th:errors="*{gender}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Citizenship</label></td>
+                    <td>
+                        <input type="text" th:field="*{citizenship}" placeholder="Citizenship">
+                        <div class="field-validation-error" th:errors="*{citizenship}"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Id Number</label></td>
+                    <td>
+                        <input type="text" th:field="*{idNumber}" placeholder="Id Number">
+                        <div class="field-validation-error" th:errors="*{idNumber}"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="link-container">
+            <a th:href="@{/account/loginForm}">Back to Login</a>
+        </div>
+    </main>
+</div>
+</body>
+</html>

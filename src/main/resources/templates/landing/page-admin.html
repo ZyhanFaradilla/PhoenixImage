@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<main>
+    <div class="dashboard-wrapper">
+        <h2>WELCOME TO PHOENIX WEB</h2>
+
+        <div class="dashboard-container annual-income">
+            <div class="header">
+                <h1>Annual Income</h1>
+            </div>
+            <div class="body">
+                <div class="chart"></div>
+                <div class="analysis">
+                    <div>
+                        <span>Order Year : </span>
+                        <select class="order-year">
+                            <option th:each="option : ${yearDropdown}" th:value="${option.value}"
+                                    th:text="${option.textContent}"></option>
+                        </select>
+                    </div>
+                    <p>
+                        Data on the left-hand side shows our income in the year <span class="highlight year"></span>.
+                        The charts will show us the changes on every monthly period.
+                    </p>
+                    <p><span class="note">(Please hover your pointer to check the value on every month.)</span></p>
+                    <p>The total income in <span class="highlight year"></span> is: <span class="highlight total-income"></span>.</p>
+                    <p>
+                        The fluctuation of our income compare to the previous year is <span class="highlight fluctuation"></span>.
+                        <span class="note">(Positive value will show an increment, on the contrary the negative value will show us a decrement.)</span>
+                    </p>
+                    <p>The highest income lies on the period of <span class="highlight highest-period"></span>.</p>
+                    <p>The lowest income lies on the period of <span class="highlight lowest-period"></span>.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+<th:block th:replace="~{layout :: template (${breadCrumbs})}"></th:block>
+<script th:src="@{/resources/js/dashboard.js}"></script>
+</body>
+</html>

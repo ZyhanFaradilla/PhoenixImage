@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Room Detail')}"></th:block>
+<main>
+    <div class="grid-container">
+        <table th:each="row : ${grid}" th:object="${row}">
+            <a class="blue-button" th:href="@{/rooms/reservationRoom(number=*{number}, username=${#authentication.getPrincipal().getUsername()})}">Extend Stay</a>
+            <tbody>
+            <tr>
+                <td>Room Number</td>
+                <td th:text="*{number}"></td>
+            </tr>
+            <tr>
+                <td>Floor</td>
+                <td th:text="*{floor}"></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td th:text="*{roomType}"></td>
+            </tr>
+            <tr>
+                <td>Guess Limit</td>
+                <td th:text="*{guestLimit}"></td>
+            </tr>
+            <tr>
+                <td>Cost Per Night</td>
+                <td th:text="*{#numbers.formatCurrency(costPerDay)}"></td>
+            </tr>
+            <tr>
+                <td>Check In</td>
+                <td th:text="*{#temporals.format(checkIn, 'dd MMMM yyyy HH:mm')}"></td>
+            </tr>
+            <tr>
+                <td>Check Out</td>
+                <td th:text="*{#temporals.format(checkOut, 'dd MMMM yyyy HH:mm')}"></td>
+            </tr>
+            <tr>
+                <td>Total Cost</td>
+                <td th:text="*{#numbers.formatCurrency(costTotal)}"></td>
+            </tr>
+            <tr>
+                <td>Reservation Method</td>
+                <td th:text="*{reservationMethod}"></td>
+            </tr>
+            <tr>
+                <td>Payment Date</td>
+                <td th:text="*{#temporals.format(paymentDate, 'dd MMMM yyyy HH:mm')}"></td>
+            </tr>
+            <tr>
+                <td>Payment Method</td>
+                <td th:text="*{paymentMethod}"></td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td th:text="*{remark}"></td>
+            </tr>
+            </tbody>
+            <tbody>
+            <tr>
+                <td>Room Number</td>
+                <td th:text="*{number}"></td>
+            </tr>
+            <tr>
+                <td>Floor</td>
+                <td th:text="*{floor}"></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td th:text="*{roomType}"></td>
+            </tr>
+            <tr>
+                <td>Guess Limit</td>
+                <td th:text="*{guestLimit}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

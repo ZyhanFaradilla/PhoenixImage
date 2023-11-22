@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact</title>
+</head>
+<body>
+<div th:fragment="detailDialog" class="popup-dialog detail-dialog">
+  <header>
+    <h1>Reservation Detail</h1>
+    <a href="javascript:;" class="close-button">
+      <i class="fas fa-window-close"></i>
+    </a>
+  </header>
+  <table>
+    <tbody>
+    <tr>
+      <td>Reservation Code</td>
+      <td class="code"></td>
+    </tr>
+    <tr>
+      <td>Reservation Method</td>
+      <td class="reservationMethod"></td>
+    </tr>
+    <tr>
+      <td>Room Number</td>
+      <td class="roomNumber"></td>
+    </tr>
+    <tr>
+      <td>Room Floor</td>
+      <td class="roomFloor"></td>
+    </tr>
+    <tr>
+      <td>Room Type</td>
+      <td class="roomType"></td>
+    </tr>
+    <tr>
+      <td>Guest Username</td>
+      <td class="guestUsername"></td>
+    </tr>
+    <tr>
+      <td>Guest Full Name</td>
+      <td class="guestFullName"></td>
+    </tr>
+    <tr>
+      <td>Book Date</td>
+      <td class="bookDate"></td>
+    </tr>
+    <tr>
+      <td>Check In</td>
+      <td class="checkIn"></td>
+    </tr>
+    <tr>
+      <td>Check Out</td>
+      <td class="checkOut"></td>
+    </tr>
+    <tr>
+      <td>Cost</td>
+      <td class="total-cost"></td>
+    </tr>
+    <tr>
+      <td>Payment Date</td>
+      <td class="paymentDate"></td>
+    </tr>
+    <tr>
+      <td>Payment Method</td>
+      <td class="paymentMethod"></td>
+    </tr>
+    <tr>
+      <td>Remark</td>
+      <td class="remark"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Room / Item')}"></th:block>
+<main>
+    <div class="grid-container">
+        <div class="header-info" th:object="${header}">
+            <div>
+                Employee Number:
+                <span th:text="*{employeeNumber}"></span>
+            </div>
+            <div>
+                Full Name:
+                <span th:text="*{fullName}"></span>
+            </div>
+            <div>
+                Outsourcing Company:
+                <span th:text="*{outsourcingCompany}"></span>
+            </div>
+        </div>
+        <a th:href="@{/roomServices/rosterUpsert(employeeNumber=${header.employeeNumber})}" class="blue-button create-button">Edit Roster</a>
+        <table>
+            <tbody>
+            <tr>
+                <td>Monday</td>
+                <td th:text="${grid.mondayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.mondayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td th:text="${grid.tuesdayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.tuesdayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td th:text="${grid.wednesdayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.wednesdayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td th:text="${grid.thursdayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.thursdayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td th:text="${grid.fridayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.fridayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td th:text="${grid.saturdayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.saturdayRosterFinish}"></td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td th:text="${grid.sundayRosterStart}"></td>
+                <td>-</td>
+                <td th:text="${grid.sundayRosterFinish}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

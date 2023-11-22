@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Room / Item')}"></th:block>
+<main>
+    <div class="grid-container">
+        <div class="header-info" th:object="${header}">
+            <div>
+                Room Number:
+                <span th:text="*{number}"></span>
+            </div>
+            <div>
+                Room Floor:
+                <span th:text="*{floor}"></span>
+            </div>
+            <div>
+                Room Type:
+                <span th:text="*{roomType}"></span>
+            </div>
+            <div>
+                Guess Limit:
+                <span th:text="*{guestLimit}"></span>
+            </div>
+        </div>
+        <a href="javascript:;" class="blue-button create-button" th:attr="data-id=${header.number}">Insert New Item</a>
+        <table>
+            <thead>
+            <tr>
+                <th>ACTION</th>
+                <th>Inventory</th>
+                <th>Stock</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button delete-button" th:href="@{/rooms/deleteRoomInventories(id=*{id}, roomNumber=${header.number})}">Remove</a>
+                </td>
+                <td th:text="*{inventoryName}"></td>
+                <td th:text="*{stock}"></td>
+                <td th:text="*{quantity}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}"
+                               th:href="@{/rooms/detail(number=${header.number}, page=${number})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <div class="popup-dialog input-dialog">
+        <form>
+            <input type="hidden" class="id">
+            <input type="hidden" class="roomNumber">
+            <table>
+                <tbody>
+                <tr>
+                    <td><label>Insert Inventory</label></td>
+                    <td>
+                        <select class="inventoryName">
+                            <option th:value=null>Select Inventory</option>
+                            <option th:each="option : ${inventoriesDropdown}" th:value="${option.value}"
+                                    th:text="${option.textContent}"></option>
+                        </select>
+                        <div class="validation-message" data-for="inventoryName"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
+                    <td>
+                        <input type="number" class="quantity">
+                        <div class="validation-message" data-for="quantity"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="blue-button" type="submit">Submit</button>
+            <a href="javascript:;" class="blue-button close-button">Close</a>
+        </form>
+    </div>
+</div>
+<script th:src="@{/resources/js/room-inventories/room-inventories-popup.js}"></script>
+</body>
+</html>

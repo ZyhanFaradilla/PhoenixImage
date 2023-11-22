@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Reservations Log')}"></th:block>
+<main>
+    <div class="grid-container">
+        <form class="filter" method="get" th:action="@{/reservationLog/index}">
+            <label>Room Number</label>
+            <input type="text" placeholder="Room Number..." name="roomNumber" th:value="${roomNumber}">
+            <label>Guest Username</label>
+            <input type="text" placeholder="Username..." name="guestUsername" th:value="${guestUsername}">
+            <label>Book Date</label>
+            <input type="datetime-local" name="bookDate" th:value="${bookDate}">
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+        <a href="javascript:;" class="blue-button total-button">Total Income</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Room Number</th>
+                <th>Username</th>
+                <th>Book Date</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Payment Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td th:text="*{code}" class="detail-button" th:attr="data-id=*{code}"></td>
+                <td th:text="*{roomNumber}"></td>
+                <td th:text="*{guestUsername}"></td>
+                <td th:text="*{#temporals.format(bookDate, 'dd MMMM yyyy HH:mm')}"></td>
+                <td th:text="*{#temporals.format(checkIn, 'dd MMMM yyyy HH:mm')}"></td>
+                <td th:text="*{#temporals.format(checkOut, 'dd MMMM yyyy HH:mm')}"></td>
+                <td th:text="*{#temporals.format(paymentDate, 'dd MMMM yyyy HH:mm')}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="pagination">
+                        <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}"
+                               th:href="@{/reservationLog/index(page=${number}, roomNumber=${roomNumber}, guestUsername=${guestUsername}, bookDate=${bookDate})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <th:block th:replace="reservation-log/reservation-total-income-popup :: formDialog"></th:block>
+    <th:block th:replace="reservation-log/reservation-detail-popup :: detailDialog"></th:block>
+</div>
+<script th:src="@{/resources/js/reservation/reservation.js}"></script>
+</body>
+</html>

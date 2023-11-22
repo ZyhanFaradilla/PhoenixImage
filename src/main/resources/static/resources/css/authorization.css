@@ -1,0 +1,12 @@
+[data-role="Guest"] .administrators,
+[data-role="Guest"] .rooms,
+[data-role="Guest"] .inventories,
+[data-role="Guest"] .roomServices,
+[data-role="Guest"] .reservationLog,
+[data-role="Guest"] .annual-income,
+[data-role="Administrator"] .booking,
+[data-role="Administrator"] .reservation,
+[data-role="Guest"] .passwordAdministrator,
+[data-role="Administrator"] .passwordGuest{
+    display: none;
+}

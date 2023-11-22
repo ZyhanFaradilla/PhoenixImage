@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AdministratorsForm</title>
+</head>
+<body>
+<div th:fragment="updateDialog" class="popup-dialog update-dialog">
+    <header>
+        <h1>Inventories Form</h1>
+    </header>
+    <form class="alternate-action">
+        <table>
+            <tbody>
+            <tr>
+                <td>Name*</td>
+                <td>
+                    <input type="text" class="name" readonly>
+                    <div class="validation-message" data-for="name"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Stock*</td>
+                <td>
+                    <input type="number" class="stock">
+                    <div class="validation-message" data-for="stock"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="textarea-label"><label>Description</label></td>
+                <td>
+                    <textarea class="description"></textarea>
+                    <div class="field-validation-error" data-for="description"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="blue-button" type="submit">Submit</button>
+        <a href="javascript:;" class="blue-button close-button">Close</a>
+    </form>
+</div>
+</body>
+</html>

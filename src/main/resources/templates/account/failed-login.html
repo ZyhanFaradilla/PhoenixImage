@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout:: head}"></head>
+<body class="authentication-body">
+<div class="authentication-wrapper">
+    <main>
+        <h1>Login Attempt Fail</h1>
+        <p>
+            Username dan password tidak exist di database pastikan username dan password sudah benar atau register account baru disini.
+        </p>
+        <div>
+            <a th:href="@{/account/loginForm}">Kembali ke Login</a>
+        </div>
+        <div>
+            <a th:href="@{/account/registerForm}">Register Disini</a>
+        </div>
+    </main>
+</div>
+</body>
+</html>

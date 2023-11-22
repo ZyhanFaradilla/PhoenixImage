@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+<th:block th:replace="~{layout :: template('Rooms')}"></th:block>
+<main>
+    <div class="grid-container-image">
+        <form class="filter" method="get" th:action="@{/rooms/index}">
+            <label>Room</label>
+            <input type="text" placeholder="Room..." name="number" th:value="${number}">
+            <select name="type">
+                <option th:value="null">All Type</option>
+                <option th:each="option : ${typeDropdown}" th:value="${option.value}"
+                        th:text="${option.textContent}" th:selected="${option.value == type}"></option>
+            </select>
+            <select name="status">
+                <option th:value="null">All Status</option>
+                <option th:each="option : ${statusDropdown}" th:value="${option.value}"
+                        th:text="${option.textContent}" th:selected="${option.value == status}"></option>
+            </select>
+            <button type="submit" class="blue-button">Search</button>
+        </form>
+        <a th:href="@{/rooms/upsertForm}" class="blue-button create-button">Insert New Room</a>
+        <div class="tiles-container">
+            <div class="tile" th:each="tile : ${grid}" th:object="${tile}">
+                <div class="number" th:text="*{number}"></div>
+                <div class="image-container" th:if="*{imgPath == null}">
+                    <img th:src="@{/resources/image/room/no-image.jpg}">
+                </div>
+                <div class="image-container" th:if="*{imgPath != null}">
+                    <img th:src="@{/resources/image/room/{path}(path=*{imgPath})}">
+                </div>
+                <div class="button-wrapper">
+                    <a class="blue-button update-button" th:href="@{/rooms/upsertForm(number=*{number})}">Edit</a>
+                    <a class="blue-button detail-button" th:href="@{/rooms/detail(number=*{number})}">Item</a>
+                </div>
+                <div class="costPerDay" th:text="*{#numbers.formatCurrency(cost)}"></div>
+                <div class="floor" th:text="*{floor}"></div>
+                <div class="type" th:text="*{roomType}"></div>
+                <div class="guestLimit" th:text="*{guestLimit}"></div>
+                <div class="status" th:text="*{status}"></div>
+            </div>
+        </div>
+        <div class="pagination">
+            <div th:text="|page ${currentPage} of ${totalPages}|"></div>
+            <div th:if="${totalPages != 0}">
+                <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                   th:text="${number}"
+                   th:href="@{/rooms/index(page=${number}, number=*{number}, type=*{roomType}, status=*{status})}"></a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
